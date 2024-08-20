@@ -1,6 +1,10 @@
 // Project 2 : Banking system
 
-#include<iostream>
+#include <iostream>
+#include <string>
+#include <list>
+#include <vector>
+#include <forward_list>
 using namespace std;
 
 class Person {
@@ -43,7 +47,9 @@ public:
 		}
 		this->pass = pass;
 	}
+
 	//getters
+
 	int getId() {
 		return id;
 	}
@@ -58,7 +64,7 @@ public:
 	void Printinfo() {
 		cout << "Name =  " << name << endl;
 		cout << "ID =  " << id << endl;
-		cout << "Password =  " << "*****" << endl;
+	//	cout << "Password =  " << "*****" << endl;
 	}
 
 	void Login(int i, string p) {
@@ -95,7 +101,10 @@ public:
 			cout << "Error: Balance must be at least 1500." << endl;
 			return;
 		}
-		this->balance = balance;
+		else {
+			this->balance = balance;
+		}
+		
 	}
 
 	//getters
@@ -107,12 +116,9 @@ public:
 
 	void Printinfo() {
 		Person::Printinfo();
-		cout << " Balance = " << balance << endl;
+		cout << "Balance = " << balance << endl;
 		cout << "\n============================\n";
-
 	}
-
-
 
 	double Withdraw(double  amount) {
 		if (amount > balance)
@@ -120,6 +126,7 @@ public:
 		else
 			return balance -= amount;
 	}
+
 	double Deposit(double  amount) {
 
 		return balance += amount;
@@ -133,6 +140,7 @@ public:
 		{
 			c.Deposit(a);
 			balance -= a;
+			cout << "Transfer successfully" << endl;
 		}
 		else
 			cout << "NO enough balance to proceed" << endl;
@@ -170,7 +178,31 @@ public:
 		return salary;
 	}
 
-	//methods
+	//Methods
+
+	//add new client
+	Client addClient(int i, string n, string p, double b, list<Client> clients) {
+		Client New(i, n, p, b);
+		clients.push_back(New);
+		return New;
+	}
+	//search for client by id
+	Client searchClientId(int clientid ,list<Client> clients) {
+		
+		for (int i =0 ;i< clients.size();i++ ) {
+			
+		}
+	}
+	//list all clients
+	void listClients(){
+
+	}
+	//edit info of client
+	void editClient(Client c, string n, double b) {
+		c.setName(n);
+		c.setBalance(b);
+	}
+
 	void Printinfo() {
 		Person::Printinfo();
 		cout << " Salary = " << salary << endl;
@@ -218,13 +250,12 @@ int main() {
 	Client Ahmed(250183, "elghazaly", "33333", 10000);
 	Admin hassan(250993, "hassan eladmin ", "9999", 1000);
 
-	hassan.Login(250993, "9999");
+	//hassan.Login(250993, "9999");
+
+	//Ahmed.Printinfo();
 	//Hisham.setName("hisham123");
 	//hassan.Printinfo();
-
-
-
-
-
+	list<Client> l;
+	Hisham.addClient(55, "salma","234",100000,l).Printinfo();
 
 }
