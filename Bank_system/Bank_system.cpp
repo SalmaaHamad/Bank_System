@@ -181,22 +181,31 @@ public:
 	//Methods
 
 	//add new client
-	Client addClient(int i, string n, string p, double b, list<Client> clients) {
+	Client addClient(int i, string n, string p, double b, list<Client> c) {
 		Client New(i, n, p, b);
-		clients.push_back(New);
+		c.push_back(New);
 		return New;
 	}
 	//search for client by id
-	Client searchClientId(int clientid ,list<Client> clients) {
-		
-		for (int i =0 ;i< clients.size();i++ ) {
-			
+	void searchClientId(int clientid ,list<Client> c) {
+		list <Client> ::iterator it;
+		for (it =c.begin() ;it != c.end();it++ ) {
+			if ((*it).getId() == clientid) {
+				 (*it).Printinfo();
+				 return;
+			}
 		}
 	}
-	//list all clients
-	void listClients(){
 
+	//list all clients
+	void listClients(list<Client> c){
+		list <Client> ::iterator it;
+		for (it = c.begin(); it != c.end(); it++) {
+			(*it).Printinfo();
+			cout << "\n================\n";
+		}
 	}
+
 	//edit info of client
 	void editClient(Client c, string n, double b) {
 		c.setName(n);
@@ -224,6 +233,36 @@ public:
 	Admin(int id, string name, string pass, double salary) :Employee(id, name, pass, salary) {
 
 	}
+	//add new Employee
+	Employee addEmployee(int i, string n, string p, double b, list<Employee> clients) {
+		Employee New(i, n, p, b);
+		clients.push_back(New);
+		return New;
+	}
+	//search for Employee by id
+	void searchEmployeeId(int Eid, list<Employee> E) {
+			list <Employee> ::iterator it;
+			for (it = E.begin(); it != E.end(); it++) {
+				if ((*it).getId() == Eid) {
+					(*it).Printinfo();
+					return;
+				}
+			}
+	}
+	//list all Employee
+	void listEmployees(list<Employee> l) {
+		list<Employee> ::iterator it;
+		for (it = l.begin(); it != l.end(); it++) {
+			(*it).Printinfo();
+			cout << "\n================\n";
+		}
+
+	}
+	//edit info of Employee
+	void editEmployee(Employee E, string n,double s) {
+		E.setName(n);
+		E.setSalary(s);
+	}
 };
 
 
@@ -231,8 +270,7 @@ int main() {
 	////Person p(250183, "ahmed", "123");
 	////p.Printinfo();
 
-	//Client malak(250172, "Malak", "22112023",2000);
-	//Client Omar(250183, "omar", "1422019", 0);
+	
 	////malak.Printinfo();
 	////malak.Login(250172, "22112023");
 	//malak.Withdraw(1000);
@@ -247,8 +285,10 @@ int main() {
 	//malak.Printinfo();
 
 	Employee Hisham(250558, "hesham", "22222", 5000);
+	Client malak(250172, "Malak", "22112023",2000);
+	Client Omar(250183, "omar", "1422019", 0);
 	Client Ahmed(250183, "elghazaly", "33333", 10000);
-	Admin hassan(250993, "hassan eladmin ", "9999", 1000);
+	//Admin hassan(250993, "hassan eladmin ", "9999", 1000);
 
 	//hassan.Login(250993, "9999");
 
@@ -256,6 +296,17 @@ int main() {
 	//Hisham.setName("hisham123");
 	//hassan.Printinfo();
 	list<Client> l;
-	Hisham.addClient(55, "salma","234",100000,l).Printinfo();
+	l.push_back(malak);
+	l.push_back(Omar);
+	l.push_back(Ahmed);
+	
+	Hisham.addClient(55, "salma","234",100000,l);
+	Hisham.searchClientId(250172, l);
+	
 
+	/*Hisham.addClient(65, "Ahmed","534",400000,l);
+	Hisham.addClient(75, "Hussein","7996",200000,l);
+	Hisham.addClient(85, "Kinzy","347",300000,l);*/
+
+	cout << l.size();
 }
